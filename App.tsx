@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import WaveSimulator from './components/WaveSimulator';
 import SolverPanel from './components/SolverPanel';
 import { WaveParams, AIAnalysisResult } from './types';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, ChevronLeft, Menu } from 'lucide-react';
 
 const App: React.FC = () => {
   const [waveParams, setWaveParams] = useState<WaveParams>({
@@ -55,12 +55,22 @@ const App: React.FC = () => {
       </div>
 
       {/* Right Panel: Simulation (Rest) */}
-      <div className="flex-1 h-full overflow-y-auto p-4 md:p-8 bg-slate-950 relative">
-        <div className="max-w-4xl mx-auto space-y-6">
-          
-          {/* Header Description is now managed inside WaveSimulator header or above it? 
-              Let's keep the main title here but maybe simpler if sidebar is closed. 
-          */}
+      <div className="flex-1 h-full overflow-y-auto bg-slate-950 relative">
+        {/* Top Navigation / Toggle Bar */}
+        <div className="sticky top-0 z-10 bg-slate-950/80 backdrop-blur p-4 border-b border-slate-800/50 flex items-center">
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg transition-colors border border-slate-700"
+              title={isSidebarOpen ? "收起助手" : "展开助手"}
+            >
+              {isSidebarOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
+            </button>
+            <span className="ml-4 text-sm font-bold text-slate-500 uppercase tracking-wider">
+              {isSidebarOpen ? "" : "AI 物理助教已隐藏"}
+            </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-6 p-4 md:p-8">
           
           <div className="text-center md:text-left mb-8 animate-fade-in">
              {!isSidebarOpen && (
@@ -104,7 +114,6 @@ const App: React.FC = () => {
             params={waveParams} 
             onParamsChange={setWaveParams}
             isSidebarOpen={isSidebarOpen}
-            onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
 
           {/* Educational Note */}

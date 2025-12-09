@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { WaveParams, SimulationState } from '../types';
-import { Play, Pause, RefreshCw, ChevronsRight, ChevronsLeft, Ruler, Activity, MoveRight, Eye, EyeOff, MinusSquare, RotateCcw, Clock, TrendingUp, ZoomIn, ZoomOut, MoreVertical, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Play, Pause, RefreshCw, ChevronsRight, ChevronsLeft, Ruler, Activity, MoveRight, Eye, EyeOff, MinusSquare, RotateCcw, Clock, TrendingUp, ZoomIn, ZoomOut, MoreVertical } from 'lucide-react';
 
 interface WaveSimulatorProps {
   params: WaveParams;
   onParamsChange: (newParams: WaveParams) => void;
   isSidebarOpen?: boolean;
-  onToggleSidebar?: () => void;
 }
 
 // Extend state locally since we are adding UI only features without changing global types if possible, 
@@ -23,7 +22,6 @@ const WaveSimulator: React.FC<WaveSimulatorProps> = ({
     params, 
     onParamsChange, 
     isSidebarOpen = true, 
-    onToggleSidebar 
 }) => {
   const [simState, setSimState] = useState<ExtendedSimulationState>({
     isPlaying: true,
@@ -272,15 +270,6 @@ const WaveSimulator: React.FC<WaveSimulatorProps> = ({
     <div className="flex flex-col gap-6 bg-slate-900 rounded-xl pb-36">
       <div className="flex justify-between items-center border-b border-slate-700 pb-4">
         <div className="flex items-center gap-3">
-            {onToggleSidebar && (
-                <button 
-                    onClick={onToggleSidebar}
-                    className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors"
-                    title={isSidebarOpen ? "收起助手" : "展开助手"}
-                >
-                    {isSidebarOpen ? <PanelLeftClose size={20} /> : <PanelLeftOpen size={20} />}
-                </button>
-            )}
             <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
                 <span className="text-pink-500">⚡</span> 波形模拟器
             </h2>
