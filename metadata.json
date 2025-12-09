@@ -1,0 +1,8 @@
+{
+  "name": "波动多解问题求解器",
+  "description": "一个交互式物理助教，利用 Gemini 分析波的题目，并可视化空间波形与质点振动图像之间的关系，帮助学生理解多解问题。",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
